@@ -1,13 +1,6 @@
 -- for help \?
 -- list database \l
 
-CREATE TABLE products (
-    id INT,
-    name VARCHAR(50),
-    price INT,
-    on_sale BOOLEAN
-);
-
 CREATE TABLE restaurants (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -16,3 +9,17 @@ CREATE TABLE restaurants (
 );
 
 INSERT INTO restaurants ( name, location, price_range) VALUES ('mcDonalds', 'New York', 3);
+
+
+
+-----
+
+CREATE TABLE reviews (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    restaurant_id BIGINT NOT NULL REFERENCES restaurants (id),
+    name VARCHAR(50) NOT NULL,
+    review TEXT NOT NULL,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5)
+);
+
+INSERT INTO reviews (restaurant_id, name, review, rating) VALUES (8, 'Carl', 'restaurant was awesome', 5);
