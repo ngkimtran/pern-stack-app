@@ -12,12 +12,6 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(json());
 
-client.connect(function (err) {
-  if (err) {
-    return console.error("could not connect to postgres", err);
-  }
-});
-
 app.get("/api/v1/restaurants", async (_req, res) => {
   try {
     const results = await client.query(
