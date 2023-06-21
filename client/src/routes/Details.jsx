@@ -1,4 +1,4 @@
-import React, { Children, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantFinder from "../api/RestaurantFinder";
 import { RestaurantsContext } from "../context/RestaurantsContext";
@@ -28,8 +28,20 @@ const Details = () => {
     <div>
       {selectedRestaurant && (
         <>
+          <h1 className="text-center display-1">
+            {selectedRestaurant.restaurant?.name}
+          </h1>
           <div className="text-center">
-            <h1 className="display-1">{selectedRestaurant.restaurant?.name}</h1>
+            <StarRating
+              rating={selectedRestaurant.restaurant?.average_rating}
+            />
+            <span className="text-warning ml-1">
+              (
+              {selectedRestaurant.restaurant.count
+                ? `${selectedRestaurant.restaurant.count}`
+                : 0}
+              )
+            </span>
           </div>
 
           <div className="mt-3">
